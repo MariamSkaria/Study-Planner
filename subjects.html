@@ -2,25 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Subjects</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    h2 {
+      color: #333;
+    }
+    table {
+      border-collapse: collapse;
+      width: 60%;
+      margin: auto;
+      background-color: #fff;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-  <h2>Your Subjects and Grades</h2>
-  <ul id="subject-list"></ul>
+  <h2 align="center">Your Subjects and Grades</h2>
+  <table id="subjectsTable">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Grade</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
   <script>
-    fetch('grades.json')
+    fetch('subjects.json')
       .then(response => response.json())
       .then(data => {
-        const list = document.getElementById("subject-list");
-        data.subjects.forEach(subject => {
-          const item = document.createElement("li");
-          item.textContent = `${subject.name}: ${subject.grade}`;
-          list.appendChild(item);
+        const tbody = document.querySelector('#subjectsTable tbody');
+        data.forEach(subject => {
+          const row = `<tr><td>${subject.name}</td><td>${subject.grade}</td></tr>`;
+          tbody.insertAdjacentHTML('beforeend', row);
         });
-      });
+      })
+      .catch(error => console.error('Error loading subjects:', error));
   </script>
 </body>
 </html>
