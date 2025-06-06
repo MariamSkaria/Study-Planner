@@ -1,26 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <title>Calendar View</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8" />
+  <title>Study Calendar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #eef;
+    }
+    h2 {
+      text-align: center;
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      max-width: 600px;
+      margin: auto;
+    }
+    .day, .date {
+      text-align: center;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .day {
+      background-color: #4a90e2;
+      color: white;
+      font-weight: bold;
+    }
+    .date {
+      background-color: white;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
-  <h2>Academic Calendar</h2>
-  <table>
-    <tr>
-      <th>Sun</th><th>Mon</th><th>Tue</th>
-      <th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
-    </tr>
-    <tr>
-      <td></td><td>1</td><td>2</td><td>3</td>
-      <td>4</td><td>5</td><td>6</td>
-    </tr>
-    <tr>
-      <td>7</td><td>8</td><td>9</td><td>10</td>
-      <td>11</td><td>12</td><td>13</td>
-    </tr>
-    <!-- Add more rows as needed -->
-  </table>
+  <h2>📅 Study Calendar – June 2025</h2>
+  <div class="calendar">
+    <div class="day">Sun</div>
+    <div class="day">Mon</div>
+    <div class="day">Tue</div>
+    <div class="day">Wed</div>
+    <div class="day">Thu</div>
+    <div class="day">Fri</div>
+    <div class="day">Sat</div>
+
+    <!-- Empty cells before June starts on Sunday -->
+    <div class="date">1</div><div class="date">2</div><div class="date">3</div>
+    <div class="date">4</div><div class="date">5</div><div class="date">6</div><div class="date">7</div>
+    <div class="date">8</div><div class="date">9</div><div class="date">10</div><div class="date">11</div>
+    <div class="date">12</div><div class="date">13</div><div class="date">14</div><div class="date">15</div>
+    <div class="date">16</div><div class="date">17</div><div class="date">18</div><div class="date">19</div>
+    <div class="date">20</div><div class="date">21</div><div class="date">22</div><div class="date">23</div>
+    <div class="date">24</div><div class="date">25</div><div class="date">26</div><div class="date">27</div>
+    <div class="date">28</div><div class="date">29</div><div class="date">30</div>
+  </div>
 </body>
 </html>
