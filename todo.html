@@ -1,35 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <title>To-Do List</title>
-  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    #taskInput {
+      width: 60%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    #addBtn {
+      padding: 10px;
+      font-size: 16px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: white;
+      padding: 10px;
+      margin: 5px 0;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 4px;
+    }
+    .delete-btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h2>To-Do List</h2>
-  <input type="text" id="taskInput" placeholder="New Task"/>
-  <button onclick="addTask()">Add</button>
+  <h2>📝 To-Do List</h2>
+  <div style="text-align: center;">
+    <input type="text" id="taskInput" placeholder="Enter a new task" />
+    <button id="addBtn">Add</button>
+  </div>
   <ul id="taskList"></ul>
 
   <script>
-    function addTask() {
-      const taskInput = document.getElementById("taskInput");
-      const taskList = document.getElementById("taskList");
+    const taskInput = document.getElementById("taskInput");
+    const addBtn = document.getElementById("addBtn");
+    const taskList = document.getElementById("taskList");
 
-      if (taskInput.value.trim() !== "") {
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      taskList.innerHTML = "";
+      tasks.forEach((task, index) => {
         const li = document.createElement("li");
-        li.textContent = taskInput.value;
-
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "Remove";
-        removeBtn.onclick = () => li.remove();
-
-        li.onclick = () => li.classList.toggle("done");
-        li.appendChild(removeBtn);
+        li.innerHTML = `${task} <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>`;
         taskList.appendChild(li);
+      });
+    }
+
+    function saveTasks(tasks) {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    function addTask() {
+      const task = taskInput.value.trim();
+      if (task) {
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        tasks.push(task);
+        saveTasks(tasks);
+        loadTasks();
         taskInput.value = "";
       }
     }
+
+    function deleteTask(index) {
+      const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks.splice(index, 1);
+      saveTasks(tasks);
+      loadTasks();
+    }
+
+    addBtn.addEventListener("click", addTask);
+    window.addEventListener("load", loadTasks);
   </script>
 </body>
 </html>
