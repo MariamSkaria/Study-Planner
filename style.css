@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+h1, h2 {
+  color: #333;
+}
+nav a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #007bff;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+input, button {
+  margin: 5px;
+  padding: 8px;
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+li.done {
+  text-decoration: line-through;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 10px;
+}
+#timer {
+  font-size: 2em;
+  margin: 20px 0;
+}
