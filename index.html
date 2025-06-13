@@ -1,50 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Study Planner</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
     body {
+      margin: 0;
+      font-family: 'Brush Script MT', cursive;
+      background: radial-gradient(circle, #0f3d21, #2c6b3c, #34823b, #52a14c, #60b74b);
       height: 100vh;
-      background: radial-gradient(circle at center, #1a3e1f 0%, #2e6d35 50%, #3c9244 100%);
       display: flex;
-      align-items: center;
       justify-content: center;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      align-items: center;
     }
+
     .title {
       font-size: 4rem;
-      color: #fff;
-      font-family: 'Brush Script MT', cursive;
-      text-align: center;
-      padding: 20px 40px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-left: none;
-      border-right: none;
+      color: white;
       cursor: pointer;
-      transition: transform 0.3s ease, color 0.3s ease;
+      border-top: 1px solid white;
+      border-bottom: 1px solid white;
+      padding: 20px 60px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
+
     .title:hover {
       transform: scale(1.05);
-      color: #c7ffd0;
+      background-color: rgba(255, 255, 255, 0.1);
     }
   </style>
 </head>
 <body>
-
-  <div class="title" onclick="goToPlanner()">Study Planner</div>
-
-  <script>
-    function goToPlanner() {
-      // Redirect to your second page (you'll replace 'subjects.html' with the real file)
-      window.location.href = "subjects.html";
-    }
-  </script>
-
+  <div class="title" onclick="window.location.href='home.html'">
+    Study Planner
+  </div>
 </body>
 </html>
