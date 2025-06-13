@@ -2,56 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Subjects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subjects & Grades</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #f0f0f0;
-    }
-    h2 {
-      color: #333;
-    }
-    table {
-      border-collapse: collapse;
-      width: 60%;
-      margin: auto;
-      background-color: #fff;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 12px;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle, #0c3b1f, #2e8b57, #2e8b57);
+      color: white;
       text-align: center;
     }
-    th {
-      background-color: #007BFF;
+
+    h1 {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 3rem;
+      padding-top: 40px;
+    }
+
+    .form-container {
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #1a4d2e;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    input[type="text"] {
+      width: 40%;
+    }
+
+    button {
+      background-color: #5b9a64;
       color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3c7a4c;
+    }
+
+    .subject-list {
+      margin-top: 20px;
+    }
+
+    .subject-list ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .subject-list li {
+      background-color: #78a86b;
+      margin: 10px auto;
+      padding: 15px;
+      width: 60%;
+      border-radius: 10px;
+      color: black;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h2 align="center">Your Subjects and Grades</h2>
-  <table id="subjectsTable">
-    <thead>
-      <tr>
-        <th>Subject</th>
-        <th>Grade</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <h1>Subjects & Grades</h1>
+
+  <div class="form-container">
+    <input type="text" id="subjectInput" placeholder="Enter Subject" />
+    <input type="text" id="gradeInput" placeholder="Enter Grade" />
+    <button onclick="addSubject()">Add</button>
+  </div>
+
+  <div class="subject-list" id="subjectList">
+    <ul id="list"></ul>
+  </div>
 
   <script>
-    fetch('subjects.json')
-      .then(response => response.json())
-      .then(data => {
-        const tbody = document.querySelector('#subjectsTable tbody');
-        data.forEach(subject => {
-          const row = `<tr><td>${subject.name}</td><td>${subject.grade}</td></tr>`;
-          tbody.insertAdjacentHTML('beforeend', row);
-        });
-      })
-      .catch(error => console.error('Error loading subjects:', error));
+    function addSubject() {
+      const subject = document.getElementById("subjectInput").value.trim();
+      const grade = document.getElementById("gradeInput").value.trim();
+      if (subject === "" || grade === "") {
+        alert("Please enter both subject and grade.");
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.textContent = `${subject}: ${grade}`;
+      document.getElementById("list").appendChild(li);
+
+      // Clear inputs
+      document.getElementById("subjectInput").value = "";
+      document.getElementById("gradeInput").value = "";
+    }
   </script>
 </body>
 </html>
