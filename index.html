@@ -1,47 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student Academic Planner</title>
+  <meta charset="UTF-8">
+  <title>Study Planner</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      color: #333;
+      height: 100vh;
+      background: radial-gradient(circle at center, #1a3e1f 0%, #2e6d35 50%, #3c9244 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .title {
+      font-size: 4rem;
+      color: #fff;
+      font-family: 'Brush Script MT', cursive;
       text-align: center;
-      padding-top: 100px;
+      padding: 20px 40px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-left: none;
+      border-right: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, color 0.3s ease;
     }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 1.2em;
-      color: #666;
-    }
-    nav {
-      margin-top: 30px;
-    }
-    a {
-      margin: 0 10px;
-      color: royalblue;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    a:hover {
-      text-decoration: underline;
+    .title:hover {
+      transform: scale(1.05);
+      color: #c7ffd0;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to Your Academic Planner</h1>
-  <p>"Push yourself, because no one else is going to do it for you."</p>
-  <nav>
-    <a href="subjects.html">Subjects</a>
-    <a href="todo.html">To-Do</a>
-    <a href="calendar.html">Calendar</a>
-    <a href="timer.html">Study Timer</a>
-  </nav>
+
+  <div class="title" onclick="goToPlanner()">Study Planner</div>
+
+  <script>
+    function goToPlanner() {
+      // Redirect to your second page (you'll replace 'subjects.html' with the real file)
+      window.location.href = "subjects.html";
+    }
+  </script>
+
 </body>
 </html>
