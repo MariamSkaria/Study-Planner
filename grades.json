@@ -1,8 +1,0 @@
-{
-  "subjects": [
-    { "name": "Mathematics", "grade": "A" },
-    { "name": "Physics", "grade": "B+" },
-    { "name": "Chemistry", "grade": "A-" },
-    { "name": "English", "grade": "A+" }
-  ]
-}
