@@ -1,67 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pomodoro Timer</title>
   <style>
     body {
-      text-align: center;
-      font-family: Arial, sans-serif;
-      background: #fef8f0;
-      padding: 50px;
+      background: linear-gradient(to bottom right, #2c5f2d, #97bc62);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
-    h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
     }
-    #time {
-      font-size: 60px;
-      margin: 20px 0;
+    #timer {
+      font-size: 5rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+    }
+    .buttons {
+      display: flex;
+      gap: 1rem;
     }
     button {
-      font-size: 18px;
-      padding: 10px 20px;
-      margin: 10px;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #2c5f2d;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #1e3f1c;
     }
   </style>
 </head>
 <body>
-  <h2>⏱️ Pomodoro Study Timer</h2>
-  <div id="time">25:00</div>
-  <button onclick="startTimer()">Start</button>
-  <button onclick="resetTimer()">Reset</button>
+  <h1>Pomodoro Timer</h1>
+  <div id="timer">25:00</div>
+  <div class="buttons">
+    <button onclick="startTimer()">Start</button>
+    <button onclick="stopTimer()">Stop</button>
+    <button onclick="resetTimer()">Reset</button>
+  </div>
 
   <script>
     let timer;
-    let timeLeft = 25 * 60;
+    let timeLeft = 1500; // 25 minutes in seconds
+    let isRunning = false;
 
     function updateDisplay() {
       const minutes = Math.floor(timeLeft / 60);
       const seconds = timeLeft % 60;
-      document.getElementById("time").textContent =
-        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      document.getElementById("timer").textContent =
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
 
     function startTimer() {
-      if (timer) return;
+      if (isRunning) return;
+      isRunning = true;
       timer = setInterval(() => {
-        timeLeft--;
-        updateDisplay();
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          alert("⏰ Time's up! Take a break.");
-          timer = null;
-          timeLeft = 25 * 60;
+        if (timeLeft > 0) {
+          timeLeft--;
           updateDisplay();
+        } else {
+          clearInterval(timer);
+          isRunning = false;
         }
       }, 1000);
     }
 
+    function stopTimer() {
+      clearInterval(timer);
+      isRunning = false;
+    }
+
     function resetTimer() {
       clearInterval(timer);
-      timer = null;
-      timeLeft = 25 * 60;
+      timeLeft = 1500;
       updateDisplay();
+      isRunning = false;
     }
 
     updateDisplay();
