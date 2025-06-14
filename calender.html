@@ -2,100 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calendar</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      background: linear-gradient(to bottom, #2e7d32, #66bb6a);
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
-      text-align: center;
-      padding: 20px;
+      background-color: #e6f4e6;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
     h1 {
-      margin-bottom: 10px;
+      text-align: center;
+      background-color: #2e7d32;
+      color: white;
+      padding: 20px;
+      margin: 0;
     }
 
-    .calendar {
+    .calendar-container {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 10px;
-      margin: 20px auto;
+      padding: 30px;
       max-width: 800px;
+      margin: 30px auto;
     }
 
-    .day-name, .day {
-      padding: 10px;
+    .day {
+      background-color: #1f5125;
+      color: white;
+      padding: 20px;
       border-radius: 8px;
-      background-color: #1b5e20;
+      text-align: center;
+      min-height: 60px;
     }
 
-    .day-name {
+    .day.small {
       font-weight: bold;
-      background-color: #2e7d32;
-    }
-
-    .day.small-event {
       background-color: #388e3c;
-      position: relative;
     }
 
     .event {
-      font-size: 0.8em;
+      display: block;
+      font-size: 0.75em;
       margin-top: 5px;
-      color: #c8e6c9;
+      background-color: #a5d6a7;
+      color: #1b5e20;
+      border-radius: 5px;
+      padding: 3px;
     }
   </style>
 </head>
 <body>
-  <h1>Study Calendar - June 2025</h1>
-  <div class="calendar">
-    <!-- Weekday names -->
-    <div class="day-name">Sun</div>
-    <div class="day-name">Mon</div>
-    <div class="day-name">Tue</div>
-    <div class="day-name">Wed</div>
-    <div class="day-name">Thu</div>
-    <div class="day-name">Fri</div>
-    <div class="day-name">Sat</div>
+  <h1>Study Calendar</h1>
+  <div class="calendar-container">
+    <!-- Weekday Labels -->
+    <div class="day small">Sun</div>
+    <div class="day small">Mon</div>
+    <div class="day small">Tue</div>
+    <div class="day small">Wed</div>
+    <div class="day small">Thu</div>
+    <div class="day small">Fri</div>
+    <div class="day small">Sat</div>
 
-    <!-- Empty boxes to align the start (June 1, 2025 is Sunday) -->
+    <!-- Days of the month (example for a 31-day month) -->
+    <div class="day"></div> <!-- Empty slot if month doesn't start on Sunday -->
     <div class="day">1</div>
     <div class="day">2</div>
-    <div class="day small-event">3<div class="event">Submit Project</div></div>
-    <div class="day">4</div>
+    <div class="day">3</div>
+    <div class="day">4 <span class="event">Math Test</span></div>
     <div class="day">5</div>
     <div class="day">6</div>
     <div class="day">7</div>
-
     <div class="day">8</div>
     <div class="day">9</div>
-    <div class="day small-event">10<div class="event">Math Exam</div></div>
+    <div class="day">10</div>
     <div class="day">11</div>
     <div class="day">12</div>
     <div class="day">13</div>
-    <div class="day">14</div>
-
-    <div class="day">15</div>
-    <div class="day">16</div>
-    <div class="day">17</div>
-    <div class="day small-event">18<div class="event">Quiz</div></div>
-    <div class="day">19</div>
-    <div class="day">20</div>
-    <div class="day">21</div>
-
-    <div class="day">22</div>
-    <div class="day">23</div>
-    <div class="day">24</div>
-    <div class="day">25</div>
-    <div class="day small-event">26<div class="event">Submission</div></div>
-    <div class="day">27</div>
-    <div class="day">28</div>
-
-    <div class="day">29</div>
-    <div class="day">30</div>
-  </div>
-</body>
-</html>
