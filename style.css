@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #0e3b0e, #1f6e1f);
+  color: white;
+  text-align: center;
+}
+
+.index {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('your-index-background.png'); /* Or use uploaded background */
+  background-size: cover;
+}
+
+.splash-text {
+  font-size: 5em;
+  font-family: 'Brush Script MT', cursive;
+  cursor: pointer;
+  background: rgba(0,0,0,0.5);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.quote-box {
+  background-color: #2e8b57;
+  padding: 1rem;
+  font-size: 1.4rem;
+  margin: 20px auto;
+  width: 80%;
+  border-radius: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 80%;
+  margin: auto;
+}
+
+.box {
+  background-color: #145214;
+  padding: 2rem;
+  font-size: 1.5rem;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.box:hover {
+  background-color: #1f7f1f;
+}
