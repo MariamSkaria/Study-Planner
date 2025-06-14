@@ -2,158 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Study Planner Calendar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendar</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: radial-gradient(circle, #0c3b1f, #2e8b57, #2e8b57);
-      color: white;
-      text-align: center;
-    }
-
-    h1 {
-      font-family: 'Brush Script MT', cursive;
-      font-size: 3rem;
-      margin-top: 40px;
-    }
-
-    .calendar {
-      max-width: 800px;
-      margin: 30px auto;
-      background-color: #1a4d2e;
-      padding: 20px;
-      border-radius: 15px;
-    }
-
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-      font-size: 1.5rem;
-    }
-
-    .days, .dates {
+    .calendar-container {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-    }
-
-    .day, .date {
-      padding: 15px 0;
-      border: 1px solid #3b6f44;
+      gap: 10px;
+      margin: 20px;
+      padding: 20px;
     }
 
     .day {
-      font-weight: bold;
-      background-color: #2c7042;
-    }
-
-    .date {
-      background-color: #78a86b;
-      color: black;
-    }
-
-    .today {
-      background-color: #ffdd57 !important;
-      color: black;
-      font-weight: bold;
-      border: 2px solid white;
-    }
-
-    button {
-      padding: 8px 16px;
-      border: none;
-      background-color: #5b9a64;
-      color: white;
-      font-weight: bold;
+      background-color: #1f5125;
+      padding: 20px;
       border-radius: 8px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #3c7a4c;
+      color: white;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>Monthly Calendar</h1>
-  <div class="calendar">
-    <div class="calendar-header">
-      <button onclick="prevMonth()">&lt;</button>
-      <div id="monthYear"></div>
-      <button onclick="nextMonth()">&gt;</button>
-    </div>
+  <h1>Study Calendar</h1>
+  <div class="calendar-container">
+    <div class="day">Sun</div>
+    <div class="day">Mon</div>
+    <div class="day">Tue</div>
+    <div class="day">Wed</div>
+    <div class="day">Thu</div>
+    <div class="day">Fri</div>
+    <div class="day">Sat</div>
 
-    <div class="days">
-      <div class="day">Sun</div>
-      <div class="day">Mon</div>
-      <div class="day">Tue</div>
-      <div class="day">Wed</div>
-      <div class="day">Thu</div>
-      <div class="day">Fri</div>
-      <div class="day">Sat</div>
-    </div>
-
-    <div class="dates" id="calendarDates"></div>
+    <!-- Example days -->
+    <div class="day">1</div>
+    <div class="day">2</div>
+    <div class="day">3</div>
+    <div class="day">4<br><small>Math Test</small></div>
+    <div class="day">5</div>
+    <div class="day">6</div>
+    <div class="day">7</div>
+    <!-- You can expand more days similarly -->
   </div>
-
-  <script>
-    const calendarDates = document.getElementById('calendarDates');
-    const monthYear = document.getElementById('monthYear');
-
-    let currentDate = new Date();
-
-    function renderCalendar(date) {
-      const year = date.getFullYear();
-      const month = date.getMonth();
-
-      const firstDay = new Date(year, month, 1).getDay();
-      const lastDate = new Date(year, month + 1, 0).getDate();
-
-      const today = new Date();
-
-      monthYear.textContent = date.toLocaleString('default', {
-        month: 'long',
-        year: 'numeric'
-      });
-
-      calendarDates.innerHTML = '';
-
-      for (let i = 0; i < firstDay; i++) {
-        const empty = document.createElement('div');
-        calendarDates.appendChild(empty);
-      }
-
-      for (let d = 1; d <= lastDate; d++) {
-        const dayBox = document.createElement('div');
-        dayBox.textContent = d;
-        dayBox.classList.add('date');
-
-        if (
-          d === today.getDate() &&
-          month === today.getMonth() &&
-          year === today.getFullYear()
-        ) {
-          dayBox.classList.add('today');
-        }
-
-        calendarDates.appendChild(dayBox);
-      }
-    }
-
-    function prevMonth() {
-      currentDate.setMonth(currentDate.getMonth() - 1);
-      renderCalendar(currentDate);
-    }
-
-    function nextMonth() {
-      currentDate.setMonth(currentDate.getMonth() + 1);
-      renderCalendar(currentDate);
-    }
-
-    renderCalendar(currentDate);
-  </script>
 </body>
 </html>
