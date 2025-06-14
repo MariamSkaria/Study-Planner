@@ -6,15 +6,6 @@ body {
   text-align: center;
 }
 
-.index {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-image: url('your-index-background.png'); /* Or use uploaded background */
-  background-size: cover;
-}
-
 .splash-text {
   font-size: 5em;
   font-family: 'Brush Script MT', cursive;
