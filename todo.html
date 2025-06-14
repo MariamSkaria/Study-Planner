@@ -2,148 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>To-Do List</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f5fff0;
-    }
-
-    header {
-      background-color: #1a4d2e;
-      color: white;
-      text-align: center;
-      padding: 30px 20px;
-      font-size: 2rem;
-      border-bottom: 5px solid #5b9a64;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      background: #e0f2d0;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    }
-
-    .input-group {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    input[type="text"] {
-      width: 75%;
-      padding: 10px;
-      border: 2px solid #7a9e52;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-
-    button {
-      background-color: #5b9a64;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-weight: bold;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #487e4c;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    li {
-      background-color: #c2d89e;
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    li.checked {
-      text-decoration: line-through;
-      color: gray;
-      background-color: #d8e6b3;
-    }
-
-    .checkbox {
-      margin-right: 15px;
-    }
-
-    .task-text {
-      flex-grow: 1;
-    }
-
-    .delete-btn {
-      background-color: #c94c4c;
-      padding: 5px 10px;
-      border-radius: 5px;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .delete-btn:hover {
-      background-color: #a83a3a;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <header>📋 To-Do List</header>
-
-  <div class="container">
-    <div class="input-group">
-      <input type="text" id="taskInput" placeholder="Enter new task...">
-      <button onclick="addTask()">Add</button>
-    </div>
-    <ul id="taskList"></ul>
+  <h1>To-Do List</h1>
+  <div class="form-container">
+    <input type="text" id="taskInput" placeholder="Enter task..." />
+    <button onclick="addTask()">Add Task</button>
   </div>
+  <ul id="taskList"></ul>
 
   <script>
     function addTask() {
-      const input = document.getElementById("taskInput");
+      const input = document.getElementById('taskInput');
       const taskText = input.value.trim();
-      if (taskText === "") return;
+      if (taskText) {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span>${taskText}</span>
+          <button onclick="markDone(this)">✔️</button>
+          <button onclick="deleteTask(this)">❌</button>
+        `;
+        document.getElementById('taskList').appendChild(li);
+        input.value = '';
+      }
+    }
 
-      const li = document.createElement("li");
+    function markDone(button) {
+      const li = button.parentElement;
+      li.style.textDecoration = 'line-through';
+    }
 
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.classList.add("checkbox");
-      checkbox.onclick = () => li.classList.toggle("checked");
-
-      const span = document.createElement("span");
-      span.className = "task-text";
-      span.textContent = taskText;
-
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "Delete";
-      deleteBtn.className = "delete-btn";
-      deleteBtn.onclick = () => li.remove();
-
-      li.appendChild(checkbox);
-      li.appendChild(span);
-      li.appendChild(deleteBtn);
-
-      document.getElementById("taskList").appendChild(li);
-      input.value = "";
+    function deleteTask(button) {
+      const li = button.parentElement;
+      li.remove();
     }
   </script>
-
 </body>
 </html>
