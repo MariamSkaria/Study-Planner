@@ -2,47 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calendar</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    .calendar-container {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      margin: 20px;
+    body {
+      background: linear-gradient(to bottom, #2e7d32, #66bb6a);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      text-align: center;
       padding: 20px;
     }
 
-    .day {
-      background-color: #1f5125;
-      padding: 20px;
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 800px;
+    }
+
+    .day-name, .day {
+      padding: 10px;
       border-radius: 8px;
-      color: white;
-      text-align: center;
+      background-color: #1b5e20;
+    }
+
+    .day-name {
+      font-weight: bold;
+      background-color: #2e7d32;
+    }
+
+    .day.small-event {
+      background-color: #388e3c;
+      position: relative;
+    }
+
+    .event {
+      font-size: 0.8em;
+      margin-top: 5px;
+      color: #c8e6c9;
     }
   </style>
 </head>
 <body>
-  <h1>Study Calendar</h1>
-  <div class="calendar-container">
-    <div class="day">Sun</div>
-    <div class="day">Mon</div>
-    <div class="day">Tue</div>
-    <div class="day">Wed</div>
-    <div class="day">Thu</div>
-    <div class="day">Fri</div>
-    <div class="day">Sat</div>
+  <h1>Study Calendar - June 2025</h1>
+  <div class="calendar">
+    <!-- Weekday names -->
+    <div class="day-name">Sun</div>
+    <div class="day-name">Mon</div>
+    <div class="day-name">Tue</div>
+    <div class="day-name">Wed</div>
+    <div class="day-name">Thu</div>
+    <div class="day-name">Fri</div>
+    <div class="day-name">Sat</div>
 
-    <!-- Example days -->
-    <div class="day">1</div>
-    <div class="day">2</div>
-    <div class="day">3</div>
-    <div class="day">4<br><small>Math Test</small></div>
-    <div class="day">5</div>
-    <div class="day">6</div>
-    <div class="day">7</div>
-    <!-- You can expand more days similarly -->
-  </div>
-</body>
-</html>
+    <!-- Empty boxes to align the start (June 1, 2025 is Sunday) -->
+    <d
