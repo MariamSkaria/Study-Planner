@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subjects</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Subjects and Grades</h1>
+  <div class="form-container">
+    <input type="text" id="subjectInput" placeholder="Subject" />
+    <input type="text" id="gradeInput" placeholder="Grade" />
+    <button onclick="addSubject()">Add Subject</button>
+  </div>
+  <ul id="subjectList"></ul>
+
+  <script>
+    let subjects = [];
+
+    function displaySubjects() {
+      const list = document.getElementById('subjectList');
+      list.innerHTML = '';
+      subjects.forEach((subj, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <strong>${subj.subject}</strong>: ${subj.grade}
+          <button onclick="deleteSubject(${index})">Delete</button>
+          <button onclick="changeGrade(${index})">Change Grade</button>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    function addSubject() {
+      const subject = document.getElementById('subjectInput').value.trim();
+      const grade = document.getElementById('gradeInput').value.trim();
+      if (subject && grade) {
+        subjects.push({ subject, grade });
+        displaySubjects();
+        document.getElementById('subjectInput').value = '';
+        document.getElementById('gradeInput').value = '';
+      }
+    }
+
+    function deleteSubject(index) {
+      subjects.splice(index, 1);
+      displaySubjects();
+    }
+
+    function changeGrade(index) {
+      const newGrade = prompt("Enter new grade:");
+      if (newGrade) {
+        subjects[index].grade = newGrade;
+        displaySubjects();
+      }
+    }
+
+    // Load from localStorage if needed
+  </script>
+</body>
+</html>
