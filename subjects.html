@@ -1,62 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Subjects</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <h1>Subjects and Grades</h1>
-  <div class="form-container">
-    <input type="text" id="subjectInput" placeholder="Subject" />
-    <input type="text" id="gradeInput" placeholder="Grade" />
-    <button onclick="addSubject()">Add Subject</button>
-  </div>
-  <ul id="subjectList"></ul>
-
-  <script>
-    let subjects = [];
-
-    function displaySubjects() {
-      const list = document.getElementById('subjectList');
-      list.innerHTML = '';
-      subjects.forEach((subj, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <strong>${subj.subject}</strong>: ${subj.grade}
-          <button onclick="deleteSubject(${index})">Delete</button>
-          <button onclick="changeGrade(${index})">Change Grade</button>
-        `;
-        list.appendChild(li);
-      });
+  <meta charset="UTF-8">
+  <title>Subjects and Grades</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #c6f5d3; /* soft green */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
 
+    h1 {
+      margin-top: 40px;
+      font-size: 2.5rem;
+      color: #114b2c;
+    }
+
+    .form-container {
+      margin-top: 30px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+      width: 150px;
+    }
+
+    button {
+      padding: 10px 16px;
+      font-size: 1.1rem;
+      background-color: #44bd69;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3aa65b;
+    }
+
+    .subject-list {
+      margin-top: 40px;
+      width: 80%;
+      max-width: 600px;
+    }
+
+    .subject-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background-color: #e5fbe9;
+      margin: 10px 0;
+      border-radius: 8px;
+      font-size: 1.2rem;
+    }
+
+    .subject-name {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Subjects and Grades</h1>
+
+  <div class="form-container">
+    <input type="text" id="subjectInput" placeholder="Subject">
+    <input type="text" id="gradeInput" placeholder="Grade">
+    <button onclick="addSubject()">Add Subject</button>
+  </div>
+
+  <div class="subject-list" id="subjectList">
+    <!-- Added subjects will appear here -->
+  </div>
+
+  <script>
     function addSubject() {
       const subject = document.getElementById('subjectInput').value.trim();
       const grade = document.getElementById('gradeInput').value.trim();
-      if (subject && grade) {
-        subjects.push({ subject, grade });
-        displaySubjects();
-        document.getElementById('subjectInput').value = '';
-        document.getElementById('gradeInput').value = '';
-      }
-    }
 
-    function deleteSubject(index) {
-      subjects.splice(index, 1);
-      displaySubjects();
-    }
+      if (subject === '' || grade === '') return;
 
-    function changeGrade(index) {
-      const newGrade = prompt("Enter new grade:");
-      if (newGrade) {
-        subjects[index].grade = newGrade;
-        displaySubjects();
-      }
-    }
+      const list = document.getElementById('subjectList');
+      const item = document.createElement('div');
+      item.className = 'subject-item';
 
-    // Load from localStorage if needed
+      item.innerHTML = `
+        <span class="subject-name">${subject}</span>
+        <span>${grade}</span>
+      `;
+
+      list.appendChild(item);
+
+      // Clear input fields
+      document.getElementById('subjectInput').value = '';
+      document.getElementById('gradeInput').value = '';
+    }
   </script>
+
 </body>
 </html>
