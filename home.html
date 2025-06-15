@@ -3,8 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Home - Study Planner</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="quotes.js" defer></script>
   <style>
     body {
       background-color: white;
@@ -19,9 +17,18 @@
       align-items: center;
       background-color: #b6e7c9;
       padding: 20px;
-      gap: 10px;
+      gap: 20px;
     }
-  
+
+    .quote-nav {
+      font-size: 1.8rem;
+      font-weight: bold;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: #1b5e20;
+    }
+
     .quote-box {
       font-size: 1.4rem;
       font-weight: bold;
@@ -30,21 +37,9 @@
       flex-grow: 1;
     }
 
-    .refresh-btn {
-      padding: 8px 14px;
-      font-size: 1rem;
-      background-color: #a7e6a2;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .refresh-btn:hover {
-      background-color: #8cd48a;
-    }
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(2, 1fr); /* 2 columns */
       gap: 30px;
       padding: 60px;
       max-width: 900px;
@@ -67,21 +62,58 @@
       background-color: #a5e6bf;
       transform: scale(1.05);
     }
+
+    @media (max-width: 600px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
 
   <div class="quote-container">
+    <button class="quote-nav" onclick="prevQuote()">‹</button>
     <div id="quoteBox" class="quote-box">"Stay focused and never give up!"</div>
-    <button class="refresh-btn" onclick="loadNewQuote()">🔄</button>
+    <button class="quote-nav" onclick="nextQuote()">›</button>
   </div>
 
   <div class="grid-container">
     <div onclick="location.href='subjects.html'" class="box">📚 Subjects</div>
     <div onclick="location.href='todo.html'" class="box">✅ To-Do List</div>
-    <div onclick="location.href='calender.html'" class="box">📅 Calendar</div>
+    <div onclick="location.href='calendar.html'" class="box">📅 Calendar</div>
     <div onclick="location.href='pomodoro.html'" class="box">⏳ Pomodoro</div>
   </div>
+
+  <script>
+    const quotes = [
+      "Stay focused and never give up!",
+      "Success is the sum of small efforts, repeated daily.",
+      "Push yourself, because no one else is going to do it for you.",
+      "Dream big. Work hard. Stay humble.",
+      "Believe you can and you're halfway there.",
+      "Every day is a fresh start — make it count!"
+    ];
+
+    let currentQuote = 0;
+    const quoteBox = document.getElementById("quoteBox");
+
+    function updateQuote() {
+      quoteBox.textContent = `"${quotes[currentQuote]}"`;
+    }
+
+    function nextQuote() {
+      currentQuote = (currentQuote + 1) % quotes.length;
+      updateQuote();
+    }
+
+    function prevQuote() {
+      currentQuote = (currentQuote - 1 + quotes.length) % quotes.length;
+      updateQuote();
+    }
+
+    updateQuote(); // Initial load
+  </script>
 
 </body>
 </html>
