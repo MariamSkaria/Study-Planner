@@ -5,9 +5,75 @@
   <title>Home - Study Planner</title>
   <link rel="stylesheet" href="style.css">
   <script src="quotes.js" defer></script>
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .quote-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #d9fdd3;
+      padding: 20px;
+      gap: 10px;
+    }
+
+    .quote-box {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #2d572c;
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    .refresh-btn {
+      padding: 8px 14px;
+      font-size: 1rem;
+      background-color: #a7e6a2;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .refresh-btn:hover {
+      background-color: #8cd48a;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 40px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .box {
+      background-color: #b0eac2;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    .box:hover {
+      background-color: #9ddaad;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-  <div class="quote-box" id="quoteBox">"Stay focused and never give up!"</div>
+  <div class="quote-container">
+    <div id="quoteBox" class="quote-box">"Stay focused and never give up!"</div>
+    <button class="refresh-btn" onclick="loadNewQuote()">🔄</button>
+  </div>
+
   <div class="grid-container">
     <div onclick="location.href='subjects.html'" class="box">📚 Subjects</div>
     <div onclick="location.href='todo.html'" class="box">✅ To-Do List</div>
