@@ -40,26 +40,30 @@
     button {
       padding: 10px 16px;
       font-size: 1.1rem;
-      background-color: #44bd69;
-      color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
 
-    button:hover {
+    .add-btn {
+      background-color: #44bd69;
+      color: white;
+    }
+
+    .add-btn:hover {
       background-color: #3aa65b;
     }
 
     .subject-list {
       margin-top: 40px;
       width: 80%;
-      max-width: 600px;
+      max-width: 700px;
     }
 
     .subject-item {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 12px 20px;
       background-color: #e5fbe9;
       margin: 10px 0;
@@ -67,8 +71,38 @@
       font-size: 1.2rem;
     }
 
+    .subject-details {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
     .subject-name {
       font-weight: bold;
+    }
+
+    .actions button {
+      margin-left: 10px;
+      padding: 6px 10px;
+      font-size: 1rem;
+    }
+
+    .edit-btn {
+      background-color: #ffa726;
+      color: white;
+    }
+
+    .delete-btn {
+      background-color: #ef5350;
+      color: white;
+    }
+
+    .edit-btn:hover {
+      background-color: #fb8c00;
+    }
+
+    .delete-btn:hover {
+      background-color: #e53935;
     }
   </style>
 </head>
@@ -79,11 +113,11 @@
   <div class="form-container">
     <input type="text" id="subjectInput" placeholder="Subject">
     <input type="text" id="gradeInput" placeholder="Grade">
-    <button onclick="addSubject()">Add Subject</button>
+    <button class="add-btn" onclick="addSubject()">Add Subject</button>
   </div>
 
   <div class="subject-list" id="subjectList">
-    <!-- Added subjects will appear here -->
+    <!-- Dynamic subjects will be listed here -->
   </div>
 
   <script>
@@ -98,15 +132,42 @@
       item.className = 'subject-item';
 
       item.innerHTML = `
-        <span class="subject-name">${subject}</span>
-        <span>${grade}</span>
+        <div class="subject-details">
+          <span class="subject-name">${subject}</span>
+          <span class="subject-grade">${grade}</span>
+        </div>
+        <div class="actions">
+          <button class="edit-btn" onclick="editSubject(this)">Edit</button>
+          <button class="delete-btn" onclick="deleteSubject(this)">Delete</button>
+        </div>
       `;
 
       list.appendChild(item);
 
-      // Clear input fields
       document.getElementById('subjectInput').value = '';
       document.getElementById('gradeInput').value = '';
+    }
+
+    function deleteSubject(button) {
+      const item = button.closest('.subject-item');
+      item.remove();
+    }
+
+    function editSubject(button) {
+      const item = button.closest('.subject-item');
+      const subjectSpan = item.querySelector('.subject-name');
+      const gradeSpan = item.querySelector('.subject-grade');
+
+      const newSubject = prompt("Edit subject:", subjectSpan.textContent);
+      const newGrade = prompt("Edit grade:", gradeSpan.textContent);
+
+      if (newSubject !== null && newSubject.trim() !== '') {
+        subjectSpan.textContent = newSubject.trim();
+      }
+
+      if (newGrade !== null && newGrade.trim() !== '') {
+        gradeSpan.textContent = newGrade.trim();
+      }
     }
   </script>
 
