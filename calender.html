@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calendar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Study Calendar</title>
   <style>
     body {
       background-color: #e6f4e6;
@@ -25,7 +25,7 @@
       grid-template-columns: repeat(7, 1fr);
       gap: 10px;
       padding: 30px;
-      max-width: 800px;
+      max-width: 900px;
       margin: 30px auto;
     }
 
@@ -35,29 +35,46 @@
       padding: 20px;
       border-radius: 8px;
       text-align: center;
-      min-height: 60px;
+      min-height: 80px;
+      cursor: pointer;
+      position: relative;
     }
 
     .day.small {
-      font-weight: bold;
       background-color: #388e3c;
+      font-weight: bold;
+      cursor: default;
     }
 
     .event {
       display: block;
       font-size: 0.75em;
-      margin-top: 5px;
+      margin-top: 8px;
       background-color: #a5d6a7;
       color: #1b5e20;
       border-radius: 5px;
-      padding: 3px;
+      padding: 3px 6px;
+      position: relative;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: #ef5350;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      font-size: 0.6em;
+      padding: 2px 4px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <h1>Study Calendar</h1>
-  <div class="calendar-container">
-    <!-- Weekday Labels -->
+  <div class="calendar-container" id="calendar">
+    <!-- Weekday Headers -->
     <div class="day small">Sun</div>
     <div class="day small">Mon</div>
     <div class="day small">Tue</div>
@@ -66,38 +83,73 @@
     <div class="day small">Fri</div>
     <div class="day small">Sat</div>
 
-    <!-- Days of the month (for June 2025, starts on Sunday) -->
-    <div class="day">1</div>
-    <div class="day">2</div>
-    <div class="day">3</div>
-    <div class="day">4 <span class="event">Math Test</span></div>
-    <div class="day">5</div>
-    <div class="day">6</div>
-    <div class="day">7</div>
-    <div class="day">8</div>
-    <div class="day">9</div>
-    <div class="day">10</div>
-    <div class="day">11</div>
-    <div class="day">12</div>
-    <div class="day">13</div>
-    <div class="day">14</div>
-    <div class="day">15</div>
-    <div class="day">16</div>
-    <div class="day">17</div>
-    <div class="day">18</div>
-    <div class="day">19</div>
-    <div class="day">20</div>
-    <div class="day">21</div>
-    <div class="day">22</div>
-    <div class="day">23</div>
-    <div class="day">24</div>
-    <div class="day">25</div>
-    <div class="day">26</div>
-    <div class="day">27</div>
-    <div class="day">28</div>
-    <div class="day">29</div>
-    <div class="day">30</div>
-    <div class="day">31</div>
+    <!-- Days 1-31 (You can generate dynamically, but hardcoded here) -->
+    <!-- You can add empty divs for alignment if month doesn't start on Sunday -->
+    <!-- Days of June 2025 start on Sunday -->
+    <!-- Dynamically filled below by JS -->
   </div>
+
+  <script>
+    const calendar = document.getElementById('calendar');
+
+    // Load tasks from localStorage
+    const tasks = JSON.parse(localStorage.getItem('tasks') || '{}');
+
+    function createDay(dayNum) {
+      const dayDiv = document.createElement('div');
+      dayDiv.className = 'day';
+      dayDiv.dataset.day = dayNum;
+      dayDiv.innerHTML = `<strong>${dayNum}</strong>`;
+
+      // Add existing events if any
+      if (tasks[dayNum]) {
+        tasks[dayNum].forEach(task => {
+          const eventEl = document.createElement('span');
+          eventEl.className = 'event';
+          eventEl.textContent = task;
+          addDeleteButton(eventEl, dayNum, task);
+          dayDiv.appendChild(eventEl);
+        });
+      }
+
+      dayDiv.addEventListener('click', function () {
+        const task = prompt(`Add a task for June ${dayNum}:`);
+        if (task) {
+          const eventEl = document.createElement('span');
+          eventEl.className = 'event';
+          eventEl.textContent = task;
+          addDeleteButton(eventEl, dayNum, task);
+          dayDiv.appendChild(eventEl);
+
+          // Save to localStorage
+          if (!tasks[dayNum]) tasks[dayNum] = [];
+          tasks[dayNum].push(task);
+          localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+      });
+
+      return dayDiv;
+    }
+
+    function addDeleteButton(eventEl, day, taskText) {
+      const delBtn = document.createElement('button');
+      delBtn.textContent = 'X';
+      delBtn.className = 'delete-btn';
+      delBtn.onclick = (e) => {
+        e.stopPropagation();
+        eventEl.remove();
+        // Remove from localStorage
+        tasks[day] = tasks[day].filter(t => t !== taskText);
+        if (tasks[day].length === 0) delete tasks[day];
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+      };
+      eventEl.appendChild(delBtn);
+    }
+
+    // Add days 1 to 31
+    for (let i = 1; i <= 31; i++) {
+      calendar.appendChild(createDay(i));
+    }
+  </script>
 </body>
 </html>
